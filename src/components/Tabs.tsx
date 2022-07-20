@@ -3,8 +3,10 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import * as React from 'react';
 import AnaliseForm from './Forms/AnaliseForm';
+import ManifestacaoForm from './Forms/ManifestacaoForm';
 import ProcessoForm from './Forms/ProcessoForm';
 import ProjetoForm from './Forms/ProjetoForm';
+
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -54,6 +56,7 @@ export default function BasicTabs() {
           <Tab label="Processo" {...a11yProps(0)} />
           <Tab label="Projeto" {...a11yProps(1)} />
           <Tab label="Análise" {...a11yProps(2)} />
+          <Tab label="Manifestação" {...a11yProps(3)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
@@ -64,6 +67,9 @@ export default function BasicTabs() {
       </TabPanel>
       <TabPanel value={value} index={2}>
         <AnaliseForm />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <ManifestacaoForm />
       </TabPanel>
     </Box>
   );

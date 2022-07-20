@@ -121,38 +121,6 @@ export default function AnaliseForm(): JSX.Element {
           </RadioGroup>
         </FormControl>
       </Grid>
-      <Grid item xs={12}>
-        <Typography variant="caption" sx={{ fontSize: 24, color: '#1976d2' }}>
-          Diretoria/SOG
-        </Typography>
-      </Grid>
-      <Grid item xs={4}>
-        <FormTextField
-          label="Manifestação da ANTAQ"
-          value={process.DSEstadoManifestacaoANTAQ || ''}
-          onChange={(e) =>
-            setProcess({
-              ...process,
-              DSEstadoManifestacaoANTAQ: e.target.value,
-            })
-          }
-          helperText="Diretoria/SOG"
-        />
-      </Grid>
-      <Grid item xs={8}>
-        <FormTextField
-          label="Deliberação da Diretoria"
-          fullWidth
-          value={process.DSTituloAnaliseREIDI || ''}
-          onChange={(e) =>
-            setProcess({
-              ...process,
-              DSTituloAnaliseREIDI: e.target.value,
-            })
-          }
-          helperText="e/ou declaração técnica SOG"
-        />
-      </Grid>
     </Grid>
   );
 }
