@@ -49,9 +49,10 @@ export default function ProcessDialog({
         IDProtocoloSEI: idProcedimento,
         DTProtocoloPedido: process.DTProtocoloPedido,
         VLInvestimentoProposto: process.VLInvestimentoProposto,
-        DSObservacoesSituacao: process.observacoes,
+        DSObservacoesSituacao: process.DSObservacoesSituacao,
         NRProtocoloMINFRA: process.NRProtocoloMINFRA,
         NRCodigoMINFRA: process.NRCodigoMINFRA,
+        MMObjeto: process.MMObjeto,
       });
 
       // Atualiza a lista de botões
@@ -83,9 +84,9 @@ export default function ProcessDialog({
       await apiDB.put(`/controlereidi/${encodedProcessNumber}` , {
         DTProtocoloPedido: process.DTProtocoloPedido,
         VLInvestimentoProposto: process.VLInvestimentoProposto,
-        DSObservacoesSituacao: process.DSObservacoesSituacao, //ver eduardo
+        DSObservacoesSituacao: process.DSObservacoesSituacao, 
         NRProtocoloMINFRA: process.NRProtocoloMINFRA,
-        NRCodigoMINFRA: process.NRCodigoMINFRA,
+        NRCodigoMINFRA: process.NRCodigoMINFRA, 
       });
 
       const message = 'Processo atualizado!';
