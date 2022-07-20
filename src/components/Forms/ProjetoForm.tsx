@@ -112,11 +112,11 @@ export default function ProjetoForm(): JSX.Element {
         <FormTextField
           disabled
           label="Perfil de carga"
-          value={process.perfilCarga || ''}
+          value={process.DSTipoAcondicionamento || ''}
           onChange={(e) =>
             setProcess({
               ...process,
-              perfilCarga: e.target.value,
+              DSTipoAcondicionamento: e.target.value,
             })
           }
         />
@@ -126,25 +126,25 @@ export default function ProjetoForm(): JSX.Element {
           disabled
           label="Tipo de Carga"
           multiline
-          value={process.tipoCarga || ''}
+          value={process.NOGrupoMercadoria || ''}
           onChange={(e) =>
             setProcess({
               ...process,
-              tipoCarga: e.target.value,
+              NOGrupoMercadoria: e.target.value,
             })
           }
-        />
+        />  
       </Grid>
       <Grid item xs={12}>
         <FormTextField
           disabled
           label="Objeto"
           multiline
-          value={process.objeto || ''}
+          value={process.MMObjeto || ''}
           onChange={(e) =>
             setProcess({
               ...process,
-              objeto: e.target.value,
+              MMObjeto: e.target.value,
             })
           }
         />

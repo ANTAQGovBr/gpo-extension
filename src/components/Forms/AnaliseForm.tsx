@@ -33,11 +33,11 @@ export default function AnaliseForm(): JSX.Element {
       <Grid item xs={4}>
         <FormTextField
           label="Técnico"
-          value={process.tecnico || ''}
+          value={process.NOUsuario || ''}
           onChange={(e) =>
             setProcess({
               ...process,
-              tecnico: e.target.value,
+              NOUsuario: e.target.value,
             })
           }
         />

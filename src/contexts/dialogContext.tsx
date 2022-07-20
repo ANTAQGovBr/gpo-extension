@@ -3,61 +3,60 @@ import React, { createContext, useState, useEffect, ReactNode } from 'react';
 import { apiDB } from '../services/api';
 
 export interface Process {
-  DSTituloAnaliseREIDI: string; //
-  IDEstadoAnaliseREIDI: number; //
-  NOFantasiaEmpresa: string; //
-  NRCodigoMINFRA: string | null; //
-  IDContratoArrendamento: number | null; //
+  DSTituloAnaliseREIDI: string; 
+  IDEstadoAnaliseREIDI: number; 
+  NOFantasiaEmpresa: string; 
+  NRCodigoMINFRA: string | null; 
+  IDContratoArrendamento: number | null; 
   contratoArrendamento: string; 
-  DTProtocoloPedido: Date; //
-  DSTituloManifestacaoANTAQ: string; //
-  DTInicioAnaliseREIDI: Date | string; //
-  DSEstadoManifestacaoANTAQ: string; //
-  NRProcessoPrincipal: string; //
-  IDProtocoloSEI: string; //
-  objeto: string;
-  observacoes: string;
-  perfilCarga: string;
-  portoOrganizado: string; //
-  prazoAnalise: string;
-  NRProtocoloMINFRA: string; //
-  rowNumber: string;
-  DSObservacoesSituacao: string; //
-  tecnico: string; 
-  DTFimAnaliseREIDI: Date | string; //
-  tipoCarga: string;
-  VLInvestimentoProposto: number; //
-  IDAnaliseREIDIDocumentoSEI: string; //
-  IDManifestacaoANTAQDocumentoSEI: string; //
+  DTProtocoloPedido: Date; 
+  DSTituloManifestacaoANTAQ: string; 
+  DTInicioAnaliseREIDI: Date | string; 
+  DSEstadoManifestacaoANTAQ: string; 
+  NRProcessoPrincipal: string; 
+  IDProtocoloSEI: string; 
+  MMObjeto: string; 
+  DSTipoAcondicionamento: string; //perfil carga
+  portoOrganizado: string; 
+  prazoAnalise: string; //
+  NRProtocoloMINFRA: string; 
+  rowNumber: string; //
+  DSObservacoesSituacao: string; 
+  NOUsuario: string; 
+  DTFimAnaliseREIDI: Date | string; 
+  NOGrupoMercadoria: string; 
+  VLInvestimentoProposto: number; 
+  IDAnaliseREIDIDocumentoSEI: string; 
+  IDManifestacaoANTAQDocumentoSEI: string; 
 }
 
 const initialProcess: Process = {
-  DSTituloAnaliseREIDI: '', //
-  IDEstadoAnaliseREIDI: 1 , //
-  NOFantasiaEmpresa: '',
-  NRCodigoMINFRA: '', //
-  IDContratoArrendamento: null, //
+  DSTituloAnaliseREIDI: '', 
+  IDEstadoAnaliseREIDI: 1 , 
+  NOFantasiaEmpresa: '', 
+  NRCodigoMINFRA: '', 
+  IDContratoArrendamento: null, 
   contratoArrendamento: '', 
-  DTProtocoloPedido: Date.now(), //
-  DSTituloManifestacaoANTAQ: '', // 
-  DTInicioAnaliseREIDI: '', //
-  DSEstadoManifestacaoANTAQ: '', //
-  NRProcessoPrincipal: '', //
-  IDProtocoloSEI: '', //       
-  objeto: '',
-  DSObservacoesSituacao: '',
-  perfilCarga: '',
-  portoOrganizado: '', //
-  prazoAnalise: '',
-  NRProtocoloMINFRA: '', //
-  rowNumber: '',
-  DSObservacoesSituacao: '', //
-  tecnico: '',
-  DTFimAnaliseREIDI: '', //
-  NOGrupoMercadoria: '', //
-  VLInvestimentoProposto: 0, //
-  IDAnaliseREIDIDocumentoSEI: '',//
-  IDManifestacaoANTAQDocumentoSEI: '',//
+  DTProtocoloPedido: Date.now(), 
+  DSTituloManifestacaoANTAQ: '',  
+  DTInicioAnaliseREIDI: '', 
+  DSEstadoManifestacaoANTAQ: '', 
+  NRProcessoPrincipal: '', 
+  IDProtocoloSEI: '',        
+  MMObjeto: '', 
+  DSObservacoesSituacao: '', 
+  DSTipoAcondicionamento: '', //perfil carga
+  portoOrganizado: '', 
+  prazoAnalise: '', //
+  NRProtocoloMINFRA: '', 
+  rowNumber: '', //
+  DSObservacoesSituacao: '', 
+  NOUsuario: '', 
+  DTFimAnaliseREIDI: '', 
+  NOGrupoMercadoria: '', 
+  VLInvestimentoProposto: 0, 
+  IDAnaliseREIDIDocumentoSEI: '',
+  IDManifestacaoANTAQDocumentoSEI: '',
 };
 
 type ProcessContextType = {
