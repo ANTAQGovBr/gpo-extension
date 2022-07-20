@@ -27,6 +27,8 @@ export interface Process {
   DTFimAnaliseREIDI: Date | string; //
   tipoCarga: string;
   VLInvestimentoProposto: number; //
+  IDAnaliseREIDIDocumentoSEI: string; //
+  IDManifestacaoANTAQDocumentoSEI: string; //
 }
 
 const initialProcess: Process = {
@@ -54,6 +56,8 @@ const initialProcess: Process = {
   DTFimAnaliseREIDI: '', //
   NOGrupoMercadoria: '', //
   VLInvestimentoProposto: 0, //
+  IDAnaliseREIDIDocumentoSEI: '',//
+  IDManifestacaoANTAQDocumentoSEI: '',//
 };
 
 type ProcessContextType = {

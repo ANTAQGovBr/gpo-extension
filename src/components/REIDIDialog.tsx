@@ -1,3 +1,4 @@
+import { DialogContext } from '../contexts/dialogContext';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import InboxIcon from '@mui/icons-material/Inbox';
 import {
@@ -12,7 +13,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { unmountComponentAtNode } from 'react-dom';
 import Tabs from './Tabs';
 
@@ -87,6 +88,7 @@ export default function REIDIDialog({
   type,
 }: DialogProps): JSX.Element {
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false);
+  const {process, setProcess} = useContext(DialogContext);
 
   const handleConfirmDelete = () => {
     setDeleteDialogOpen(true);
@@ -134,6 +136,8 @@ export default function REIDIDialog({
             Processo SEI
           </Button>
           <Button
+            href={`https://sei.antaq.gov.br/sei/controlador.php?acao=procedimento_trabalhar&id_procedimento=${idProcedimento}&id_documento=${process.IDAnaliseREIDIDocumentoSEI}`}
+            target="_blank"
             sx={{
               display: 'flex',
               flexDirection: 'column',
@@ -141,17 +145,20 @@ export default function REIDIDialog({
             }}
           >
             <InboxIcon />
-            Requisição
+            Análise
           </Button>
           <Button
+            href={`https://sei.antaq.gov.br/sei/controlador.php?acao=procedimento_trabalhar&id_procedimento=${idProcedimento}&id_documento=${process.IDManifestacaoANTAQDocumentoSEI}`}
+            target="_blank"
             sx={{
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
             }}
+
           >
             <InboxIcon />
-            Entrega
+            Manifestação
           </Button>
         </Stack>
         <Divider />
