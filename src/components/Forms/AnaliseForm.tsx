@@ -22,7 +22,7 @@ export default function AnaliseForm(): JSX.Element {
   ) => {
     setAndamentoGPO((event.target as HTMLInputElement).value);
   };
-
+  
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -67,18 +67,22 @@ export default function AnaliseForm(): JSX.Element {
           }
         />
       </Grid>
+
       <Grid item xs={4}>
         <FormDatePicker
           label="Término da Análise - GPO"
-          value={process.DTFimAnaliseREIDI || null}
+          value={process.DTFimAnaliseREIDI || ''}
           onChange={(newValue) =>
             setProcess({
               ...process,
               DTFimAnaliseREIDI: newValue,
+              //tratamento de data DTFimAnaliseREIDI - DTInicioAnaliseREIDI em milisegundos
+              prazoAnalise: Math.trunc((newValue.getTime() - process.DTInicioAnaliseREIDI.getTime()) /(1000 * 3600 * 24)),
             })
           }
         />
       </Grid>
+      
       <Grid item xs={4}>
         <FormTextField
           label="Prazo de Análise"
@@ -87,11 +91,12 @@ export default function AnaliseForm(): JSX.Element {
           onChange={(e) =>
             setProcess({
               ...process,
-              prazoAnalise: e.target.value,
+              prazoAnalise: e.target.value
             })
           }
         />
       </Grid>
+
       <Grid item xs={12}>
         <FormControl component="fieldset">
           <FormLabel component="legend">Andamento GPO</FormLabel>

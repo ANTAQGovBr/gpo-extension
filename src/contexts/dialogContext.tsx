@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect, ReactNode } from 'react';
 
 import { apiDB } from '../services/api';
 
+
 export interface Process {
   DSTituloAnaliseREIDI: string; 
   IDEstadoAnaliseREIDI: number; 
@@ -11,19 +12,19 @@ export interface Process {
   contratoArrendamento: string; 
   DTProtocoloPedido: Date; 
   DSTituloManifestacaoANTAQ: string; 
-  DTInicioAnaliseREIDI: Date | string; 
+  DTInicioAnaliseREIDI: Date | null; 
   DSEstadoManifestacaoANTAQ: string; 
   NRProcessoPrincipal: string; 
   IDProtocoloSEI: string; 
   MMObjeto: string; 
   DSTipoAcondicionamento: string; //perfil carga
   portoOrganizado: string; 
-  prazoAnalise: string; //
+  prazoAnalise: number | string;
   NRProtocoloMINFRA: string; 
   rowNumber: string; //
   DSObservacoesSituacao: string; 
   NOUsuario: string; 
-  DTFimAnaliseREIDI: Date | string; 
+  DTFimAnaliseREIDI: Date | null; 
   NOGrupoMercadoria: string; 
   VLInvestimentoProposto: number; 
   IDAnaliseREIDIDocumentoSEI: string; 
@@ -39,7 +40,7 @@ const initialProcess: Process = {
   contratoArrendamento: '', 
   DTProtocoloPedido: Date.now(), 
   DSTituloManifestacaoANTAQ: '',  
-  DTInicioAnaliseREIDI: '', 
+  DTInicioAnaliseREIDI: null, 
   DSEstadoManifestacaoANTAQ: '', 
   NRProcessoPrincipal: '', 
   IDProtocoloSEI: '',        
@@ -47,12 +48,12 @@ const initialProcess: Process = {
   DSObservacoesSituacao: '', 
   DSTipoAcondicionamento: '', //perfil carga
   portoOrganizado: '', 
-  prazoAnalise: '', //
+  prazoAnalise: 1 , //
   NRProtocoloMINFRA: '', 
   rowNumber: '', //
   DSObservacoesSituacao: '', 
   NOUsuario: '', 
-  DTFimAnaliseREIDI: '', 
+  DTFimAnaliseREIDI: null, 
   NOGrupoMercadoria: '', 
   VLInvestimentoProposto: 0, 
   IDAnaliseREIDIDocumentoSEI: '',
@@ -91,3 +92,4 @@ export function DialogProvider({ children }: ProcessContextProviderProps) {
     </DialogContext.Provider>
   );
 }
+
