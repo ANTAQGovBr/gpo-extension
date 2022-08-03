@@ -41,8 +41,12 @@ export default function ProcessDialog({
 
   // Cria um novo Processo
   const handleCreateProcess = async (callback) => {
+
+    const encodedProcessNumber = encodeURIComponent(numeroProcesso);
+
     try {
       setLoading(true);
+
       await apiDB.post('/controlereidi', {
         IDContratoArrendamento: process.IDContratoArrendamento,
         NRProcessoPrincipal: numeroProcesso,
@@ -53,6 +57,16 @@ export default function ProcessDialog({
         NRProtocoloMINFRA: process.NRProtocoloMINFRA,
         NRCodigoMINFRA: process.NRCodigoMINFRA,
         MMObjeto: process.MMObjeto,
+      });
+
+      await apiDB.post(`/analisereidi/${encodedProcessNumber}`, {
+        //IDUsuario: process.IDUsuario,
+        DSTituloAnaliseREIDI: process.DSTituloAnaliseREIDI,
+        DTInicioAnaliseREIDI: process.DTInicioAnaliseREIDI,
+        DTFimAnaliseREIDI: process.DTFimAnaliseREIDI,
+        IDEstadoAnaliseREIDI: process.IDEstadoAnaliseREIDI,
+        //NRDIDocumentoSEI: process.NRAnaliseREIDIDocumentoSEI,
+        //IDAnaliseREIAnaliseREIDIDocumentoSEI: process.IDAnaliseREIDIDocumentoSEI
       });
 
       // Atualiza a lista de botões
@@ -87,6 +101,12 @@ export default function ProcessDialog({
         DSObservacoesSituacao: process.DSObservacoesSituacao, 
         NRProtocoloMINFRA: process.NRProtocoloMINFRA,
         NRCodigoMINFRA: process.NRCodigoMINFRA, 
+      });
+
+      await apiDB.put(`/analisereidi/${encodedProcessNumber}` , {
+        DSTituloAnaliseREIDI: process.DSTituloAnaliseREIDI,
+        DTInicioAnaliseREIDI: process.DTInicioAnaliseREIDI,
+        DTFimAnaliseREIDI: process.DTFimAnaliseREIDI,
       });
 
       const message = 'Processo atualizado!';
