@@ -129,7 +129,9 @@ export default function ProcessDialog({
 
     try {
       setLoading(true);
+      await apiDB.delete(`/analisereidi/${encodedProcessNumber}`);
       await apiDB.delete(`/controlereidi/${encodedProcessNumber}`);
+      
 
       const message = `Sucesso ao deletar o processo n.º ${numeroProcesso} `;
       const severity = 'success';
