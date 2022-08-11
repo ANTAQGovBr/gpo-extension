@@ -69,6 +69,14 @@ export default function ProcessDialog({
         //IDAnaliseREIAnaliseREIDIDocumentoSEI: process.IDAnaliseREIDIDocumentoSEI
       });
 
+      await apiDB.post(`/manifestacaoantaq/${encodedProcessNumber}` , {
+        DSTituloManifestacaoANTAQ: process.DSTituloManifestacaoANTAQ,
+        NRManifestacaoANTAQDocumentoSEI: process.NRManifestacaoANTAQDocumentoSEI,
+        IDManifestacaoANTAQDocumentoSEI: process.IDManifestacaoANTAQDocumentoSEI,
+        DTManifestacaoANTAQ: process.DTManifestacaoANTAQ,
+      });
+
+
       // Atualiza a lista de botões
       chrome.runtime.sendMessage({
         action: 'reloadREIDI',
@@ -109,6 +117,13 @@ export default function ProcessDialog({
         DTFimAnaliseREIDI: process.DTFimAnaliseREIDI,
       });
 
+      await apiDB.put(`/manifestacaoantaq/${encodedProcessNumber}` , {
+        DSTituloManifestacaoANTAQ: process.DSTituloManifestacaoANTAQ,
+        NRManifestacaoANTAQDocumentoSEI: process.NRManifestacaoANTAQDocumentoSEI,
+        IDManifestacaoANTAQDocumentoSEI: process.IDManifestacaoANTAQDocumentoSEI,
+        DTManifestacaoANTAQ: process.DTManifestacaoANTAQ,
+      });
+
       const message = 'Processo atualizado!';
       const severity = 'success';
 
@@ -130,7 +145,9 @@ export default function ProcessDialog({
     try {
       setLoading(true);
       await apiDB.delete(`/analisereidi/${encodedProcessNumber}`);
+      await apiDB.delete(`/manifestacaoantaq/${encodedProcessNumber}`);
       await apiDB.delete(`/controlereidi/${encodedProcessNumber}`);
+
       
 
       const message = `Sucesso ao deletar o processo n.º ${numeroProcesso} `;
