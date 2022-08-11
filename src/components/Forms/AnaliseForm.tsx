@@ -77,7 +77,7 @@ export default function AnaliseForm(): JSX.Element {
               ...process,
               DTFimAnaliseREIDI: newValue,
               //tratamento de data DTFimAnaliseREIDI - DTInicioAnaliseREIDI em milisegundos
-              prazoAnalise: Math.trunc((newValue.getTime() - process.DTInicioAnaliseREIDI.getTime()) /(1000 * 3600 * 24)),
+              prazoAnalise: (Math.trunc((newValue.getTime() - process.DTInicioAnaliseREIDI.getTime()) /(1000 * 3600 * 24))+ 1),
             })
           }
         />
@@ -108,21 +108,35 @@ export default function AnaliseForm(): JSX.Element {
             onChange={handleRadioButtonChange}
           >
             <FormControlLabel
-              value="Pendente"
+              value="0"
               control={<Radio />}
-              label="Pendente"
+              label="Para Distribuição"
             />
             <FormControlLabel
-              value="Em análise"
+              value="1"
               control={<Radio />}
-              label="Em análise"
+              label="Análise em Curso"
             />
             <FormControlLabel
-              value="Finalizado"
+              value="2"
               control={<Radio />}
-              label="Finalizado"
+              label="Avaliação Gerencial"
             />
-            <FormControlLabel value="Outro" control={<Radio />} label="Outro" />
+            <FormControlLabel 
+            value="3" 
+            control={<Radio />} 
+            label="Aguardando Elementos Externos" 
+            />
+            <FormControlLabel 
+            value="4" 
+            control={<Radio />} 
+            label="Aguardando Elementos Externos" 
+            />
+            <FormControlLabel 
+            value="5" 
+            control={<Radio />} 
+            label="Finalizado" 
+            />
           </RadioGroup>
         </FormControl>
       </Grid>
