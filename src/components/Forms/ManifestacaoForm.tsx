@@ -10,17 +10,18 @@ import {
 import React, { useContext, useState } from 'react';
 import { DialogContext } from '../../contexts/dialogContext';
 import FormTextField from '../FormTextField';
+import FormDatePicker from '../FormDatePicker';
 
 export default function ManifestacaoForm(): JSX.Element {
   const { process, setProcess } = useContext(DialogContext);
 
-  //const [andamentoGPO, setAndamentoGPO] = useState('female');
+  const [manifestacaoANTAQ, setManifestacaoANTAQ] = useState('female');
 
-  //const handleRadioButtonChange = (
-  //  event: React.ChangeEvent<HTMLInputElement>
-  //) => {
-  //  setAndamentoGPO((event.target as HTMLInputElement).value);
-  //};
+  const handleRadioButtonChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setManifestacaoANTAQ((event.target as HTMLInputElement).value);
+  };
 
   return (
     <Grid container spacing={3}>
@@ -30,31 +31,68 @@ export default function ManifestacaoForm(): JSX.Element {
         </Typography>
       </Grid>
       <Grid item xs={4}>
-        <FormTextField
-          label="Manifestação da ANTAQ"
-          value={process.DSEstadoManifestacaoANTAQ || ''}
-          onChange={(e) =>
+        <FormDatePicker
+          label="Data Manifestação ANTAQ"
+          value={process.DTManifestacaoANTAQ || null}
+          onChange={(newValue) =>
             setProcess({
               ...process,
-              DSEstadoManifestacaoANTAQ: e.target.value,
+              DTManifestacaoANTAQ: newValue,
             })
           }
-          helperText="Diretoria/SOG"
         />
       </Grid>
       <Grid item xs={8}>
         <FormTextField
           label="Deliberação da Diretoria"
           fullWidth
-          value={process.DSTituloAnaliseREIDI || ''}
+          value={process.DSTituloManifestacaoANTAQ || ''}
           onChange={(e) =>
             setProcess({
               ...process,
-              DSTituloAnaliseREIDI: e.target.value,
+              DSTituloManifestacaoANTAQ: e.target.value,
             })
           }
           helperText="e/ou declaração técnica SOG"
         />
+      </Grid>
+      <Grid item xs={12}>
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Manifestação ANTAQ</FormLabel>
+          <RadioGroup
+            row
+            aria-label="andamentoGPO"
+            name="controlled-radio-buttons-group"
+            value={manifestacaoANTAQ}
+            onChange={handleRadioButtonChange}
+          >
+            <FormControlLabel
+              value="0"
+              control={<Radio />}
+              label="Não avaliado"
+            />
+            <FormControlLabel
+              value="1"
+              control={<Radio />}
+              label="Aprovado"
+            />
+            <FormControlLabel
+              value="2"
+              control={<Radio />}
+              label="Aprovado com observações/Ressalvas"
+            />
+            <FormControlLabel 
+            value="3" 
+            control={<Radio />} 
+            label="Não aprovado/Inelegível" 
+            />
+            <FormControlLabel 
+            value="4" 
+            control={<Radio />} 
+            label="Prejudicado/Arquivado" 
+            />
+          </RadioGroup>
+        </FormControl>
       </Grid>
     </Grid>
   );
