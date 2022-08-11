@@ -29,6 +29,8 @@ export interface Process {
   VLInvestimentoProposto: number; 
   IDAnaliseREIDIDocumentoSEI: string; 
   IDManifestacaoANTAQDocumentoSEI: string; 
+  DTManifestacaoANTAQ: Date | null;
+  NRManifestacaoANTAQDocumentoSEI: string;
 }
 
 const initialProcess: Process = {
@@ -38,7 +40,7 @@ const initialProcess: Process = {
   NRCodigoMINFRA: '', 
   IDContratoArrendamento: null, 
   contratoArrendamento: '', 
-  DTProtocoloPedido: Date.now(), 
+  DTProtocoloPedido: null, 
   DSTituloManifestacaoANTAQ: '',  
   DTInicioAnaliseREIDI: null, 
   DSEstadoManifestacaoANTAQ: '', 
@@ -58,6 +60,8 @@ const initialProcess: Process = {
   VLInvestimentoProposto: 0, 
   IDAnaliseREIDIDocumentoSEI: '',
   IDManifestacaoANTAQDocumentoSEI: '',
+  DTManifestacaoANTAQ: null,
+  NRManifestacaoANTAQDocumentoSEI: '',
 };
 
 type ProcessContextType = {
