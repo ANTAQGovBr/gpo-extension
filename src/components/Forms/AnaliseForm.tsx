@@ -77,7 +77,7 @@ export default function AnaliseForm(): JSX.Element {
               ...process,
               DTFimAnaliseREIDI: newValue,
               //tratamento de data DTFimAnaliseREIDI - DTInicioAnaliseREIDI em milisegundos
-              prazoAnalise: (Math.trunc((newValue.getTime() - process.DTInicioAnaliseREIDI.getTime()) /(1000 * 3600 * 24))+ 1),
+              prazoAnalise: (Math.trunc((newValue.getTime() - process.DTInicioAnaliseREIDI.getTime()) /(1000 * 3600 * 24)) + 1),
             })
           }
         />
