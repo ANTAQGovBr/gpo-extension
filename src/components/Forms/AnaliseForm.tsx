@@ -15,14 +15,15 @@ import FormTextField from '../FormTextField';
 export default function AnaliseForm(): JSX.Element {
   const { process, setProcess } = useContext(DialogContext);
 
-  const [andamentoGPO, setAndamentoGPO] = useState('female');
-
   const handleRadioButtonChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setAndamentoGPO((event.target as HTMLInputElement).value);
+    setProcess({
+      ...process,
+      IDEstadoAnaliseREIDI: Number((event.target as HTMLInputElement).value),
+    });
   };
-  
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -104,28 +105,23 @@ export default function AnaliseForm(): JSX.Element {
             row
             aria-label="andamentoGPO"
             name="controlled-radio-buttons-group"
-            value={andamentoGPO}
+            value={String(process.IDEstadoAnaliseREIDI)}
             onChange={handleRadioButtonChange}
           >
             <FormControlLabel
-              value="0"
+              value="1"
               control={<Radio />}
               label="Para Distribuição"
             />
             <FormControlLabel
-              value="1"
+              value="2"
               control={<Radio />}
               label="Análise em Curso"
             />
             <FormControlLabel
-              value="2"
+              value="3"
               control={<Radio />}
               label="Avaliação Gerencial"
-            />
-            <FormControlLabel 
-            value="3" 
-            control={<Radio />} 
-            label="Aguardando Elementos Externos" 
             />
             <FormControlLabel 
             value="4" 

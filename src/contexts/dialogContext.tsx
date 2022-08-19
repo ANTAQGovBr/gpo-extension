@@ -5,7 +5,7 @@ import { apiDB } from '../services/api';
 
 export interface Process {
   DSTituloAnaliseREIDI: string; 
-  IDEstadoAnaliseREIDI: number; 
+  IDEstadoAnaliseREIDI: number | null; 
   NOFantasiaEmpresa: string; 
   NRCodigoMINFRA: string | null; 
   IDContratoArrendamento: number | null; 
@@ -36,7 +36,7 @@ export interface Process {
 
 const initialProcess: Process = {
   DSTituloAnaliseREIDI: '', 
-  IDEstadoAnaliseREIDI: 1 , 
+  IDEstadoAnaliseREIDI: null, 
   NOFantasiaEmpresa: '', 
   NRCodigoMINFRA: '', 
   IDContratoArrendamento: null, 

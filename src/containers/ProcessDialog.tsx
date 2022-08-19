@@ -116,6 +116,7 @@ export default function ProcessDialog({
         DSTituloAnaliseREIDI: process.DSTituloAnaliseREIDI,
         DTInicioAnaliseREIDI: process.DTInicioAnaliseREIDI,
         DTFimAnaliseREIDI: process.DTFimAnaliseREIDI,
+        IDEstadoAnaliseREIDI: process.IDEstadoAnaliseREIDI,
       });
 
       await apiDB.put(`/manifestacaoantaq/${encodedProcessNumber}` , {
