@@ -31,6 +31,7 @@ export interface Process {
   IDManifestacaoANTAQDocumentoSEI: string; 
   DTManifestacaoANTAQ: Date | null;
   NRManifestacaoANTAQDocumentoSEI: string;
+  IDEstadoManifestacaoANTAQ: number | null;
 }
 
 const initialProcess: Process = {
@@ -53,7 +54,6 @@ const initialProcess: Process = {
   prazoAnalise: 1 , //
   NRProtocoloMINFRA: '', 
   rowNumber: '', //
-  DSObservacoesSituacao: '', 
   NOUsuario: '', 
   DTFimAnaliseREIDI: null, 
   NOGrupoMercadoria: '', 
@@ -62,6 +62,7 @@ const initialProcess: Process = {
   IDManifestacaoANTAQDocumentoSEI: '',
   DTManifestacaoANTAQ: null,
   NRManifestacaoANTAQDocumentoSEI: '',
+  IDEstadoManifestacaoANTAQ: 0,
 };
 
 type ProcessContextType = {

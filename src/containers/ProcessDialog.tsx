@@ -71,6 +71,7 @@ export default function ProcessDialog({
 
       await apiDB.post(`/manifestacaoantaq/${encodedProcessNumber}` , {
         DSTituloManifestacaoANTAQ: process.DSTituloManifestacaoANTAQ,
+        IDEstadoManifestacaoANTAQ: process.IDEstadoManifestacaoANTAQ,
         NRManifestacaoANTAQDocumentoSEI: process.NRManifestacaoANTAQDocumentoSEI,
         IDManifestacaoANTAQDocumentoSEI: process.IDManifestacaoANTAQDocumentoSEI,
         DTManifestacaoANTAQ: process.DTManifestacaoANTAQ,
@@ -119,6 +120,7 @@ export default function ProcessDialog({
 
       await apiDB.put(`/manifestacaoantaq/${encodedProcessNumber}` , {
         DSTituloManifestacaoANTAQ: process.DSTituloManifestacaoANTAQ,
+        IDEstadoManifestacaoANTAQ: process.IDEstadoManifestacaoANTAQ,
         NRManifestacaoANTAQDocumentoSEI: process.NRManifestacaoANTAQDocumentoSEI,
         IDManifestacaoANTAQDocumentoSEI: process.IDManifestacaoANTAQDocumentoSEI,
         DTManifestacaoANTAQ: process.DTManifestacaoANTAQ,

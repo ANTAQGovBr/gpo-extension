@@ -15,12 +15,13 @@ import FormDatePicker from '../FormDatePicker';
 export default function ManifestacaoForm(): JSX.Element {
   const { process, setProcess } = useContext(DialogContext);
 
-  const [manifestacaoANTAQ, setManifestacaoANTAQ] = useState('female');
-
   const handleRadioButtonChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setManifestacaoANTAQ((event.target as HTMLInputElement).value);
+    setProcess({
+      ...process,
+      IDEstadoManifestacaoANTAQ: Number((event.target as HTMLInputElement).value),
+    });
   };
 
   return (
@@ -63,7 +64,7 @@ export default function ManifestacaoForm(): JSX.Element {
             row
             aria-label="andamentoGPO"
             name="controlled-radio-buttons-group"
-            value={manifestacaoANTAQ}
+            value={String(process.IDEstadoManifestacaoANTAQ)}
             onChange={handleRadioButtonChange}
           >
             <FormControlLabel
@@ -71,25 +72,21 @@ export default function ManifestacaoForm(): JSX.Element {
               control={<Radio />}
               label="Não avaliado"
             />
-            <FormControlLabel
-              value="1"
-              control={<Radio />}
-              label="Aprovado"
-            />
+            <FormControlLabel value="1" control={<Radio />} label="Aprovado" />
             <FormControlLabel
               value="2"
               control={<Radio />}
               label="Aprovado com observações/Ressalvas"
             />
-            <FormControlLabel 
-            value="3" 
-            control={<Radio />} 
-            label="Não aprovado/Inelegível" 
+            <FormControlLabel
+              value="3"
+              control={<Radio />}
+              label="Não aprovado/Inelegível"
             />
-            <FormControlLabel 
-            value="4" 
-            control={<Radio />} 
-            label="Prejudicado/Arquivado" 
+            <FormControlLabel
+              value="4"
+              control={<Radio />}
+              label="Prejudicado/Arquivado"
             />
           </RadioGroup>
         </FormControl>
