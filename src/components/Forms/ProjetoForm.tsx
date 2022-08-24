@@ -5,9 +5,10 @@ import { apiDB } from '../../services/api';
 import { AsynchronousAutocomplete } from '../AsynchronousAutocomplete';
 import FormTextField from '../FormTextField';
 
-interface IPorto {
+
+export interface IPorto {
   CDBiGrama: string;
-  CDTriGrama: string;
+  CDTrigrama: string;
   NOPorto: string;
 }
 
@@ -31,7 +32,7 @@ export default function ProjetoForm(): JSX.Element {
   const handleGetContratosOptions = async (CDTriGrama: string) => {
     try {
       const response = await apiDB.get(`contratoarrendamento/${CDTriGrama}`);
-      setProcess({...process, IDContratoArrendamento: response.data.IDContratoArrendamento})
+      //setProcess({...process, IDContratoArrendamento: response.data.IDContratoArrendamento})
 
       return response.data;
     } catch (error) {
@@ -39,10 +40,24 @@ export default function ProjetoForm(): JSX.Element {
     }
   };
 
+  const handleSetValue = (value) =>{
+    if(process.IDContratoArrendamento && !value){
+      return {
+        CDBiGrama: process.CDBiGrama,
+        CDTrigrama: process.CDTriGrama,
+        NOPorto: process.NOPorto,
+      }
+    }
+    else{
+      return value;
+    }
+  }
+
   const handlePortoChange = (
     event: React.SyntheticEvent<Element, Event>,
     newValue: IPorto | null
   ): void => {
+
     setPortoValue(newValue);
     setContratoArrendamentoValue(null);
     setDisabled(false);
@@ -50,16 +65,22 @@ export default function ProjetoForm(): JSX.Element {
 
   const handleContratoArrendamentoChange = (
     event: any,
-    newValue: string | null
+    newValue: any | null
   ) => {
     setContratoArrendamentoValue(newValue);
+    const {IDContratoArrendamento} = newValue;
+    setProcess({
+      ...process,
+      IDContratoArrendamento: IDContratoArrendamento,
+
+    })
   };
 
   return (
     <Grid container spacing={3}>
       <Grid item xs={4}>
         <AsynchronousAutocomplete
-          value={portoValue}
+          value={handleSetValue(portoValue)}
           onChange={handlePortoChange}
           handleGetOptions={() => handleGetPortosOptions()}
           optionLabel="NOPorto"
@@ -71,7 +92,7 @@ export default function ProjetoForm(): JSX.Element {
           value={contratoArrendamentoValue}
           onChange={handleContratoArrendamentoChange}
           handleGetOptions={() =>
-            handleGetContratosOptions(portoValue.CDTriGrama)
+            handleGetContratosOptions(portoValue.CDTrigrama)
           }
           optionLabel="CDContrato"
           label="Contrato"

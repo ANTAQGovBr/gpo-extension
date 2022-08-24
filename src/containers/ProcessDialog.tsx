@@ -105,6 +105,7 @@ export default function ProcessDialog({
       setLoading(true);
 
       await apiDB.put(`/controlereidi/${encodedProcessNumber}` , {
+        IDContratoArrendamento: process.IDContratoArrendamento,
         DTProtocoloPedido: process.DTProtocoloPedido,
         VLInvestimentoProposto: process.VLInvestimentoProposto,
         DSObservacoesSituacao: process.DSObservacoesSituacao, 
