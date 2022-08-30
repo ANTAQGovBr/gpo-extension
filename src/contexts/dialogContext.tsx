@@ -13,7 +13,7 @@ export interface Process {
   NRCodigoMINFRA: string | null;
   //TBContratoArrendamento
   IDContratoArrendamento: number | null;
-  contratoArrendamento: string;
+  CDContrato: string;
   NOFantasiaEmpresa: string;
   //TBClassificacaoSubclassificacaoCarga
   NOGrupoMercadoria: string;

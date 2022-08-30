@@ -32,7 +32,6 @@ export default function ProjetoForm(): JSX.Element {
   const handleGetContratosOptions = async (CDTriGrama: string) => {
     try {
       const response = await apiDB.get(`contratoarrendamento/${CDTriGrama}`);
-      //setProcess({...process, IDContratoArrendamento: response.data.IDContratoArrendamento})
 
       return response.data;
     } catch (error) {
@@ -40,12 +39,24 @@ export default function ProjetoForm(): JSX.Element {
     }
   };
 
-  const handleSetValue = (value) =>{
+  const handleSetPortoValue = (value) =>{
     if(process.IDContratoArrendamento && !value){
+      //setDisabled(false);
       return {
         CDBiGrama: process.CDBiGrama,
         CDTrigrama: process.CDTriGrama,
         NOPorto: process.NOPorto,
+      }
+    }
+    else{
+      return value;
+    }
+  }
+  const handleSetContratoValue = (value) =>{
+    if(process.IDContratoArrendamento && !value){
+      return {
+        IDContratoArrendamento: process.IDContratoArrendamento,
+        CDContrato: process.CDContrato,
       }
     }
     else{
@@ -80,7 +91,7 @@ export default function ProjetoForm(): JSX.Element {
     <Grid container spacing={3}>
       <Grid item xs={4}>
         <AsynchronousAutocomplete
-          value={handleSetValue(portoValue)}
+          value={handleSetPortoValue(portoValue)}
           onChange={handlePortoChange}
           handleGetOptions={() => handleGetPortosOptions()}
           optionLabel="NOPorto"
@@ -89,7 +100,7 @@ export default function ProjetoForm(): JSX.Element {
       </Grid>
       <Grid item xs={4}>
         <AsynchronousAutocomplete
-          value={contratoArrendamentoValue}
+          value={handleSetContratoValue(contratoArrendamentoValue)}
           onChange={handleContratoArrendamentoChange}
           handleGetOptions={() =>
             handleGetContratosOptions(portoValue.CDTrigrama)
