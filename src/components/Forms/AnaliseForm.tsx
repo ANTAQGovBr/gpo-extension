@@ -7,7 +7,8 @@ import {
   RadioGroup,
   Typography,
 } from '@mui/material';
-import React, { useContext, useState } from 'react';
+import { copyFileSync } from 'fs';
+import React, { useContext, useState, useEffect } from 'react';
 import { DialogContext } from '../../contexts/dialogContext';
 import FormDatePicker from '../FormDatePicker';
 import FormTextField from '../FormTextField';
@@ -23,6 +24,38 @@ export default function AnaliseForm(): JSX.Element {
       IDEstadoAnaliseREIDI: Number((event.target as HTMLInputElement).value),
     });
   };
+
+  const handlePrazoAnalise = () => {
+    setProcess({
+      ...process,
+      //tratamento de data DTFimAnaliseREIDI - DTInicioAnaliseREIDI em milisegundos
+      prazoAnalise: (Math.trunc((process.DTFimAnaliseREIDI.getTime() - process.DTInicioAnaliseREIDI.getTime()) / (1000 * 3600 * 24)) + 1),
+    })
+  }
+
+  const [CanCalculate, setCanCalculate] = useState<Boolean>(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (CanCalculate) {
+      if (process.DTFimAnaliseREIDI !== null && process.DTInicioAnaliseREIDI !== null) {
+        handlePrazoAnalise()
+      }
+      setCanCalculate(false)
+    }
+  }, [CanCalculate]);
+
+  React.useEffect(() => {
+    if (!open) {
+      if (process.DTInicioAnaliseREIDI !== null) (
+        process.DTInicioAnaliseREIDI = new Date (Date.parse(process.DTInicioAnaliseREIDI.toString()))
+      )
+      if (process.DTFimAnaliseREIDI !== null) (
+        process.DTFimAnaliseREIDI = new Date (Date.parse(process.DTFimAnaliseREIDI.toString()))
+      )
+      setCanCalculate(true);
+    }
+  }, [open]);
 
   return (
     <Grid container spacing={3}>
@@ -73,27 +106,25 @@ export default function AnaliseForm(): JSX.Element {
         <FormDatePicker
           label="Término da Análise - GPO"
           value={process.DTFimAnaliseREIDI || ''}
-          onChange={(newValue) =>
+          onChange={(newValue) => {
             setProcess({
               ...process,
               DTFimAnaliseREIDI: newValue,
-              //tratamento de data DTFimAnaliseREIDI - DTInicioAnaliseREIDI em milisegundos
-              prazoAnalise: (Math.trunc((newValue.getTime() - process.DTInicioAnaliseREIDI.getTime()) /(1000 * 3600 * 24)) + 1),
             })
+            setCanCalculate(true)
+          }
           }
         />
       </Grid>
-      
+
       <Grid item xs={4}>
         <FormTextField
           label="Prazo de Análise"
           value={process.prazoAnalise || ''}
           disabled
-          onChange={(e) =>
-            setProcess({
-              ...process,
-              prazoAnalise: e.target.value
-            })
+          onLoad={() => {
+            setCanCalculate(true)
+          }
           }
         />
       </Grid>
@@ -123,15 +154,15 @@ export default function AnaliseForm(): JSX.Element {
               control={<Radio />}
               label="Avaliação Gerencial"
             />
-            <FormControlLabel 
-            value="4" 
-            control={<Radio />} 
-            label="Aguardando Elementos Externos" 
+            <FormControlLabel
+              value="4"
+              control={<Radio />}
+              label="Aguardando Elementos Externos"
             />
-            <FormControlLabel 
-            value="5" 
-            control={<Radio />} 
-            label="Finalizado" 
+            <FormControlLabel
+              value="5"
+              control={<Radio />}
+              label="Finalizado"
             />
           </RadioGroup>
         </FormControl>
