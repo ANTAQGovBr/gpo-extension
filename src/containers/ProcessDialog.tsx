@@ -60,7 +60,7 @@ export default function ProcessDialog({
       });
 
       await apiDB.post(`/analisereidi/${encodedProcessNumber}`, {
-        //IDUsuario: process.IDUsuario,
+        IDUsuario: process.IDUsuario,
         DSTituloAnaliseREIDI: process.DSTituloAnaliseREIDI,
         DTInicioAnaliseREIDI: process.DTInicioAnaliseREIDI,
         DTFimAnaliseREIDI: process.DTFimAnaliseREIDI,
@@ -114,6 +114,7 @@ export default function ProcessDialog({
       });
 
       await apiDB.put(`/analisereidi/${encodedProcessNumber}` , {
+        IDUsuario: process.IDUsuario,
         DSTituloAnaliseREIDI: process.DSTituloAnaliseREIDI,
         DTInicioAnaliseREIDI: process.DTInicioAnaliseREIDI,
         DTFimAnaliseREIDI: process.DTFimAnaliseREIDI,

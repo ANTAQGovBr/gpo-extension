@@ -35,7 +35,8 @@ export interface Process {
   //TBEstadoManifestacaoANTAQ
   DSEstadoManifestacaoANTAQ: string;
   //TBUsuario
-  NOUsuario: string;
+  NOUsuarioReduzido: string;
+  IDUsuario: string;
   //Sem relacao em Tb
   MMObjeto: string;
   CDBiGrama: string,
@@ -55,7 +56,7 @@ const initialProcess: Process = {
   NRCodigoMINFRA: '',
   //TBContratoArrendamento
   IDContratoArrendamento: null,
-  contratoArrendamento: '',
+  CDContrato: '',
   NOFantasiaEmpresa: '',
   //TBClassificacaoSubclassificacaoCarga
   NOGrupoMercadoria: '',
@@ -67,7 +68,7 @@ const initialProcess: Process = {
   IDEstadoAnaliseREIDI: null,
   DSTituloAnaliseREIDI: '',
   IDAnaliseREIDIDocumentoSEI: '',
-  prazoAnalise: 1, //
+  prazoAnalise: 0, //
   //TBManifestacaoANTAQ
   IDEstadoManifestacaoANTAQ: 0,
   DTManifestacaoANTAQ: null,
@@ -77,7 +78,8 @@ const initialProcess: Process = {
   //TBEstadoManifestacaoANTAQ
   DSEstadoManifestacaoANTAQ: '',
   //TBUsuario
-  NOUsuario: '',
+  NOUsuarioReduzido: '',
+  IDUsuario: '',
   //Sem relacao em Tb
   MMObjeto: '',
   CDBiGrama: '',

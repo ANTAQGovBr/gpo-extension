@@ -12,9 +12,47 @@ import React, { useContext, useState, useEffect } from 'react';
 import { DialogContext } from '../../contexts/dialogContext';
 import FormDatePicker from '../FormDatePicker';
 import FormTextField from '../FormTextField';
+import { AsynchronousAutocomplete } from '../AsynchronousAutocomplete';
+import { apiDB } from '../../services/api';
 
 export default function AnaliseForm(): JSX.Element {
   const { process, setProcess } = useContext(DialogContext);
+  const [usuarioValue, setUsuarioValue] = useState<
+    string | null
+  >(null);
+
+  const handleGetUsuarioOptions = async () => {
+    try {
+      const response = await apiDB.get("usuario");
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSetUsuarioValue = (value) => {
+    if (process.IDUsuario && !value) {
+      return {
+        IDUsuario: process.IDUsuario,
+        NOUsuarioReduzido: process.NOUsuarioReduzido,
+      }
+    }
+    else return value;
+  };
+
+  const handleUsuarioChange = (
+    event: any, 
+    newValue: any | null
+    ) => {
+    setUsuarioValue(newValue);
+    const { IDUsuario } = newValue;
+    setProcess({
+      ...process,
+      IDUsuario: IDUsuario,
+    })
+  };
+
 
   const handleRadioButtonChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -48,10 +86,10 @@ export default function AnaliseForm(): JSX.Element {
   React.useEffect(() => {
     if (!open) {
       if (process.DTInicioAnaliseREIDI !== null) (
-        process.DTInicioAnaliseREIDI = new Date (Date.parse(process.DTInicioAnaliseREIDI.toString()))
+        process.DTInicioAnaliseREIDI = new Date(Date.parse(process.DTInicioAnaliseREIDI.toString()))
       )
       if (process.DTFimAnaliseREIDI !== null) (
-        process.DTFimAnaliseREIDI = new Date (Date.parse(process.DTFimAnaliseREIDI.toString()))
+        process.DTFimAnaliseREIDI = new Date(Date.parse(process.DTFimAnaliseREIDI.toString()))
       )
       setCanCalculate(true);
     }
@@ -65,15 +103,14 @@ export default function AnaliseForm(): JSX.Element {
         </Typography>
       </Grid>
       <Grid item xs={4}>
-        <FormTextField
-          label="Técnico"
-          value={process.NOUsuario || ''}
-          onChange={(e) =>
-            setProcess({
-              ...process,
-              NOUsuario: e.target.value,
-            })
+        <AsynchronousAutocomplete
+          value={handleSetUsuarioValue(usuarioValue)}
+          onChange={handleUsuarioChange}
+          handleGetOptions={() =>
+            handleGetUsuarioOptions()
           }
+          optionLabel="NOUsuarioReduzido"
+          label="Técnico"
         />
       </Grid>
       <Grid item xs={8}>
