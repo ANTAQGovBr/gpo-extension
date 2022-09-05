@@ -2,6 +2,7 @@ import { DatePicker, DatePickerProps, LocalizationProvider } from '@mui/lab/';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { TextField, TextFieldProps } from '@mui/material';
 import React from 'react';
+import ptBR from 'date-fns/locale/pt-BR';
 
 export default function FormDatePicker({
   label,
@@ -9,11 +10,10 @@ export default function FormDatePicker({
   onChange,
 }: TextFieldProps | DatePickerProps) {
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
+    <LocalizationProvider dateAdapter={AdapterDateFns} locale={ptBR}>
       <DatePicker
         label={label}
         value={value || null}
-        inputFormat="dd/MM/yyyy"
         onChange={onChange}
         renderInput={(params) => (
           <TextField
