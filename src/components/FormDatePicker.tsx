@@ -13,6 +13,7 @@ export default function FormDatePicker({
       <DatePicker
         label={label}
         value={value || null}
+        inputFormat="dd/MM/yyyy"
         onChange={onChange}
         renderInput={(params) => (
           <TextField
