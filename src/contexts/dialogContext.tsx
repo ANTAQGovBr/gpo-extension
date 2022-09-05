@@ -108,7 +108,7 @@ export function DialogProvider({ children }: ProcessContextProviderProps) {
     const encodedProcessNumber = encodeURIComponent(processNumber);
     try {
       const response = await apiDB.get(
-        `/processo/${encodedProcessNumber}`
+        `/controlereidi/${encodedProcessNumber}`
       );
       setProcess(response.data);
     } catch (error) {

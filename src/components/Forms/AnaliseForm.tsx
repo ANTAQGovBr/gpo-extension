@@ -42,9 +42,9 @@ export default function AnaliseForm(): JSX.Element {
   };
 
   const handleUsuarioChange = (
-    event: any, 
+    event: any,
     newValue: any | null
-    ) => {
+  ) => {
     setUsuarioValue(newValue);
     const { IDUsuario } = newValue;
     setProcess({
@@ -71,29 +71,19 @@ export default function AnaliseForm(): JSX.Element {
     })
   }
 
-  const [CanCalculate, setCanCalculate] = useState<Boolean>(false);
-  const [open, setOpen] = useState(false);
+  const [CanCalculate, setCanCalculate] = useState<Boolean>(true);
+  //const [open, setOpen] = useState<Boolean>(true);
 
   useEffect(() => {
-    if (CanCalculate) {
+    if (CanCalculate ) {
       if (process.DTFimAnaliseREIDI !== null && process.DTInicioAnaliseREIDI !== null) {
-        handlePrazoAnalise()
+        process.DTInicioAnaliseREIDI = new Date(Date.parse(process.DTInicioAnaliseREIDI.toString()))
+        process.DTFimAnaliseREIDI = new Date(Date.parse(process.DTFimAnaliseREIDI.toString()))
+        handlePrazoAnalise();
       }
-      setCanCalculate(false)
+      setCanCalculate(false);
     }
   }, [CanCalculate]);
-
-  React.useEffect(() => {
-    if (!open) {
-      if (process.DTInicioAnaliseREIDI !== null) (
-        process.DTInicioAnaliseREIDI = new Date(Date.parse(process.DTInicioAnaliseREIDI.toString()))
-      )
-      if (process.DTFimAnaliseREIDI !== null) (
-        process.DTFimAnaliseREIDI = new Date(Date.parse(process.DTFimAnaliseREIDI.toString()))
-      )
-      setCanCalculate(true);
-    }
-  }, [open]);
 
   return (
     <Grid container spacing={3}>
@@ -130,11 +120,13 @@ export default function AnaliseForm(): JSX.Element {
         <FormDatePicker
           label="Início da Análise - GPO"
           value={process.DTInicioAnaliseREIDI || null}
-          onChange={(newValue) =>
+          onChange={(newValue) => {
             setProcess({
               ...process,
               DTInicioAnaliseREIDI: newValue,
             })
+            setCanCalculate(true)
+          }
           }
         />
       </Grid>
@@ -159,10 +151,6 @@ export default function AnaliseForm(): JSX.Element {
           label="Prazo de Análise"
           value={process.prazoAnalise || ''}
           disabled
-          onLoad={() => {
-            setCanCalculate(true)
-          }
-          }
         />
       </Grid>
 
