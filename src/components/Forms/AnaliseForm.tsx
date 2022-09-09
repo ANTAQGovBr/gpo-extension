@@ -63,27 +63,32 @@ export default function AnaliseForm(): JSX.Element {
     });
   };
 
-  const handlePrazoAnalise = () => {
-    setProcess({
-      ...process,
-      //tratamento de data DTFimAnaliseREIDI - DTInicioAnaliseREIDI em milisegundos
-      prazoAnalise: (Math.trunc((process.DTFimAnaliseREIDI.getTime() - process.DTInicioAnaliseREIDI.getTime()) / (1000 * 3600 * 24)) + 1),
-    })
-  }
-
-  const [CanCalculate, setCanCalculate] = useState<Boolean>(true);
-  //const [open, setOpen] = useState<Boolean>(true);
+  const [calculate, setCalculate] = useState<Boolean>(true);
 
   useEffect(() => {
-    if (CanCalculate ) {
+    if (calculate ) {
+      //verificacao de inicializacao diferencial de nulo
       if (process.DTFimAnaliseREIDI !== null && process.DTInicioAnaliseREIDI !== null) {
         process.DTInicioAnaliseREIDI = new Date(Date.parse(process.DTInicioAnaliseREIDI.toString()))
         process.DTFimAnaliseREIDI = new Date(Date.parse(process.DTFimAnaliseREIDI.toString()))
-        handlePrazoAnalise();
+        //comparacao de datas
+        if (process.DTInicioAnaliseREIDI <= process.DTFimAnaliseREIDI) {
+          setProcess({
+            ...process,
+             //calculo de data DTFimAnaliseREIDI - DTInicioAnaliseREIDI em milisegundos
+            prazoAnalise: (Math.trunc((process.DTFimAnaliseREIDI.getTime() - process.DTInicioAnaliseREIDI.getTime()) / (1000 * 3600 * 24)) + 1),
+          })
+        } else {
+          setProcess({
+            ...process,
+            //Mensagem de aviso de data invalida
+            prazoAnalise: "Data Inválida"
+          })
+        }
       }
-      setCanCalculate(false);
+      setCalculate(false);
     }
-  }, [CanCalculate]);
+  }, [calculate]);
 
   return (
     <Grid container spacing={3}>
@@ -125,7 +130,7 @@ export default function AnaliseForm(): JSX.Element {
               ...process,
               DTInicioAnaliseREIDI: newValue,
             })
-            setCanCalculate(true)
+            setCalculate(true)
           }
           }
         />
@@ -140,7 +145,7 @@ export default function AnaliseForm(): JSX.Element {
               ...process,
               DTFimAnaliseREIDI: newValue,
             })
-            setCanCalculate(true)
+            setCalculate(true)
           }
           }
         />
