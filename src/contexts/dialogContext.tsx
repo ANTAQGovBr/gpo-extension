@@ -11,14 +11,18 @@ export interface Process {
   DSObservacoesSituacao: string;
   NRProtocoloMINFRA: string;
   NRCodigoMINFRA: string | null;
+
   //TBContratoArrendamento
   IDContratoArrendamento: number | null;
   CDContrato: string;
   NOFantasiaEmpresa: string;
+
   //TBClassificacaoSubclassificacaoCarga
   NOGrupoMercadoria: string;
+
   //TBTipoAcondicionamento
-  DSTipoAcondicionamento: string; //perfil carga
+  DSTipoAcondicionamento: string; 
+
   //TBAnaliseREIDI
   DTInicioAnaliseREIDI: Date | null;
   DTFimAnaliseREIDI: Date | null;
@@ -26,21 +30,25 @@ export interface Process {
   DSTituloAnaliseREIDI: string;
   IDAnaliseREIDIDocumentoSEI: string;
   prazoAnalise: number | string;
+
   //TBManifestacaoANTAQ
   IDEstadoManifestacaoANTAQ: number | null;
   DTManifestacaoANTAQ: Date | null;
   DSTituloManifestacaoANTAQ: string;
   NRManifestacaoANTAQDocumentoSEI: string;
   IDManifestacaoANTAQDocumentoSEI: string;
+
   //TBEstadoManifestacaoANTAQ
   DSEstadoManifestacaoANTAQ: string;
+
   //TBUsuario
   NOUsuarioReduzido: string;
   IDUsuario: string;
+
   //Sem relacao em Tb
   MMObjeto: string;
   CDBiGrama: string,
-  CDTriGrama: string,
+  CDTrigrama: string,
   NOPorto: string,
   rowNumber: string; //
 }
@@ -83,7 +91,7 @@ const initialProcess: Process = {
   //Sem relacao em Tb
   MMObjeto: '',
   CDBiGrama: '',
-  CDTriGrama: '',
+  CDTrigrama: '',
   NOPorto: '',
   rowNumber: '', //
 };
