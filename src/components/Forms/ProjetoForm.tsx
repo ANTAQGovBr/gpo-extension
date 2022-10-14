@@ -33,7 +33,7 @@ export default function ProjetoForm(): JSX.Element {
 
   const handleGetContratosOptions = async (CDTriGrama: string) => {
     try {
-      const response = await apiDB.get(`contratoarrendamentos/${CDTriGrama}`);
+      const response = await apiDB.get(`contratoarrendamento/${CDTriGrama}`);
 
       return response.data;
     } catch (error) {
@@ -48,8 +48,9 @@ export default function ProjetoForm(): JSX.Element {
       setContratoArrendamentoValue(handleSetContratoValue(contratoArrendamentoValue));
     } else {
       setDisabled(true);
-      setContratoArrendamentoValue(handleSetContratoValue(null));
+      //setContratoArrendamentoValue(handleSetContratoValue(null));
     }
+    setContratoArrendamentoValue(handleSetContratoValue(null));
   }, [portoValue]);
 
   const handleSetPortoValue = (value) => {
