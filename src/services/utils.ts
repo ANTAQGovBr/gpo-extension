@@ -22,7 +22,7 @@ export const createRowModel = (row: Process) => {
     'Prazo de Análise': row.prazoAnalise,
     //'SITUAÇÃO': row.DSObservacoesSituacao,
     'Manifestação da ANTAQ (Diretoria/SOG)': row.IDEstadoManifestacaoANTAQ,
-    'Deliberação da diretoria (e/ou declaração técnica SOG)':
+    'Deliberação da diretoria (e/ou declaração técnica SOG)': 
       row.DSTituloManifestacaoANTAQ,
   };
   return value;
