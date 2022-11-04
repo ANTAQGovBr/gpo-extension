@@ -71,7 +71,7 @@ export default function DataGrid(): JSX.Element {
         const result = await apiDB.get(
           `/controlereidi/${encodedProcessNumber}`
         );
-        processList.push(result.data)
+        processList.push(result.data) 
       });
       await sleep(1e3);
       setData(processList);
