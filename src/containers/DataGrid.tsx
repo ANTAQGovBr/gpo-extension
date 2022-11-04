@@ -1,60 +1,80 @@
 import MaterialTable, { Column } from '@material-table/core';
 import { ExportCsv, ExportPdf } from '@material-table/exporters';
 import React, { useEffect, useState } from 'react';
-import { api } from '../services/api';
+import { apiDB } from '../services/api';
 import { createRowModel } from '../services/utils';
 
 const initialState: Column<any>[] = [
-  { title: 'ID', field: 'id', hidden: true },
+  { title: 'ID', field: 'IDControleREIDI', hidden: true },
   {
     title: 'Número do Processo',
-    field: 'numeroProcesso',
+    field: 'NRProcessoPrincipal',
   },
-  { title: 'Data de Protocolo do Pedido', field: 'dataProtocoloPedido' },
+  { title: 'Data de Protocolo do Pedido', field: 'DTProtocoloPedido' },
   {
     title: 'Porto Organizado',
-    field: 'portoOrganizado',
+    field: 'NOPorto',
   },
-  { title: 'Contrato de Arrendamento', field: 'contratoArrendamento' },
-  { title: 'Arrendatário', field: 'arrendatario' },
+  { title: 'Contrato de Arrendamento', field: 'CDContrato' },
+  { title: 'Arrendatário', field: 'NOFantasiaEmpresa' },
   {
     title: 'Valor do Investimento Proposto',
-    field: 'valorInvestimentoProposto',
+    field: 'VLInvestimentoProposto',
   },
-  { title: 'Perfil de Carga', field: 'perfilCarga' },
-  { title: 'Tipo de Carga', field: 'tipoCarga' },
-  { title: 'Análise da GPO', field: 'analiseGPO' },
-  { title: 'Objeto', field: 'objeto' },
-  { title: 'Observações', field: 'observacoes' },
-  { title: 'Técnico', field: 'tecnico' },
-  { title: 'Andamento GPO', field: 'andamentoGPO' },
+  { title: 'Perfil de Carga', field: 'DSTipoAcondicionamento' },
+  { title: 'Tipo de Carga', field: 'NOGrupoMercadoria' },
+  { title: 'Análise da GPO', field: 'DSTituloAnaliseREIDI' },
+  { title: 'Objeto', field: 'MMObjeto' },
+  { title: 'OBSERVAÇÃO e SITUAÇÃO', field: 'DSObservacoesSituacao' },
+  { title: 'Técnico', field: 'NOUsuarioReduzido' },
+  { title: 'Andamento GPO', field: 'IDEstadoAnaliseREIDI' },
   {
     title: 'Início da Análise - GPO',
-    field: 'inicioAnaliseGPO',
+    field: 'DTInicioAnaliseREIDI',
     type: 'date',
   },
-  { title: 'Término da Análise - GPO', field: 'terminoAnaliseGPO' },
+  {
+    title: 'Término da Análise - GPO',
+    field: 'DTFimAnaliseREIDI',
+    type: 'date',
+  },
   { title: 'Prazo de Análise', field: 'prazoAnalise' },
-  { title: 'Situação', field: 'situacao' },
+  //{ title: 'Situação', field: 'DSObservacoesSituacao' },
   {
     title: 'Manifestação da ANTAQ (Diretoria/SOG)',
-    field: 'manifestacaoANTAQ',
+    field: 'IDEstadoManifestacaoANTAQ',
   },
   {
     title: 'Deliberação da diretoria (e/ou declaração técnica SOG)',
-    field: 'deliberacaoDiretoria',
+    field: 'DSTituloManifestacaoANTAQ',
   },
 ];
+
+function sleep(delay = 0) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  });
+};
 
 export default function DataGrid(): JSX.Element {
   const [data, setData] = useState([]);
   const [columns, setColumns] = useState<Column<any>[]>(initialState);
 
-  // Requisita os processos cadastrados
   const getProcesses = async () => {
     try {
-      const response = await api.get('/spreadsheet');
-      setData(response.data);
+      let processList = [];
+      const response = await apiDB.get('/match-rows');
+      response.data.forEach(async (element) => {
+        let encodedProcessNumber = encodeURIComponent(
+          element.NRProcessoPrincipal
+        );
+        const result = await apiDB.get(
+          `/controlereidi/${encodedProcessNumber}`
+        );
+        processList.push(result.data)
+      });
+      await sleep(1e3);
+      setData(processList);
     } catch (error) {
       console.warn(error);
     }
@@ -114,8 +134,7 @@ export default function DataGrid(): JSX.Element {
         editable={{
           onRowAdd: (newData) => handleRowAdd(newData).then(getProcesses),
           onRowDelete: (oldData) => handleRowDelete(oldData).then(getProcesses),
-          onRowUpdate: (newData, oldData) =>
-            handleRowUpdate(newData, oldData).then(getProcesses),
+          onRowUpdate: (newData, oldData) => handleRowUpdate(newData, oldData).then(getProcesses),
         }}
         localization={{
           body: {
@@ -146,8 +165,8 @@ export default function DataGrid(): JSX.Element {
           filtering: true,
           grouping: true,
           sorting: true,
-          pageSize: 5,
-          pageSizeOptions: [5, 10, 15, 20, 25],
+          pageSize: 35,
+          pageSizeOptions: [5, 20, 35],
           maxBodyHeight: 700,
           minBodyHeight: 700,
           overflowY: 'scroll',
