@@ -41,6 +41,10 @@ module.exports = function (env, argv) {
         __dirname,
         'src/pages/Content/buttonsScript.tsx'
       ),
+      buttonProcessScript: path.resolve(
+        __dirname,
+        'src/pages/Content/buttonProcessScript.tsx'
+      ),
       dialogScript: path.resolve(
         __dirname,
         'src/pages/Content/dialogScript.tsx'

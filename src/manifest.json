@@ -33,6 +33,12 @@
         "dialogScript.bundle.js",
         "snackbarScript.bundle.js"
       ]
+    }, 
+    {
+      "matches": ["https://sei.antaq.gov.br/sei/controlador.php?acao=procedimento_trabalhar*"],
+      "js": [
+        "buttonProcessScript.bundle.js"
+      ]
     }
   ]
 }
