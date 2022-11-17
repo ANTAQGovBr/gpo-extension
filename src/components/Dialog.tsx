@@ -63,10 +63,10 @@ export default function AlertDialog({ container }: AlertDialogProps) {
         </DialogContentText>
         <Box sx={{ margin: 5 }}>
           <FormControl fullWidth>
-            <InputLabel id="select-label">Documento</InputLabel>
+            <InputLabel id="select-label">Controle</InputLabel>
             <Select
               value={type}
-              label="Documento"
+              label="Controle"
               onChange={handleChange}
               labelId="select-label"
               fullWidth
