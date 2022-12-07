@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DialogContext } from '../../contexts/dialogContext';
 import FormDatePicker from '../FormDatePicker';
 import FormTextField from '../FormTextField';
@@ -7,12 +7,25 @@ import FormTextField from '../FormTextField';
 export default function ProcessoForm() {
   const { process, setProcess } = useContext(DialogContext);
 
+  const [isDisabled, setDisabled] = useState(true); 
+  const [isOpen, setOpen] = useState(true);
+
+
+  useEffect(() => {
+    if(process.NRProcessoPrincipal == null) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [isOpen]);
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={4}>
         <FormTextField
           label="Número do Processo SEI"
           value={process.NRProcessoPrincipal || ''}
+          disabled={isDisabled}
           onChange={(e) =>
             setProcess({
               ...process,

@@ -49,7 +49,7 @@ export default function ProcessDialog({
 
       await apiDB.post('/controlereidi', {
         IDContratoArrendamento: process.IDContratoArrendamento,
-        NRProcessoPrincipal: numeroProcesso,
+        NRProcessoPrincipal: process.NRProcessoPrincipal,
         IDProtocoloSEI: idProcedimento,
         DTProtocoloPedido: process.DTProtocoloPedido,
         VLInvestimentoProposto: process.VLInvestimentoProposto,
